@@ -6,9 +6,12 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
-var users = require('./routes/users');
+var rooms = require('./routes/rooms');
 
 var app = express();
+
+var generate = require('./generate-room');
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -22,8 +25,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.post('/enter_room', function (req, res) {
+  //console.log(req);
+  var room_id = generate.generateRoom();
+  res.redirect('/rooms/' + room_id);
+});
+
 app.use('/', index);
-app.use('/users', users);
+app.use('/rooms/:id', rooms);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
