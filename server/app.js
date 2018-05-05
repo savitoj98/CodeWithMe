@@ -4,7 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var cors = require("cors")
+var cors = require("cors");
+var Request = require('request');
 var index = require('./routes/index');
 var rooms = require('./routes/rooms');
 
@@ -24,12 +25,40 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(cors())
+app.use(cors());
 
-app.get('/new_room', function (req, res, next) {
+app.post('/enter_room', function (req, res, next) {
   //console.log(req);
   var room_id = generate.generateRoom();
-  res.status(200).send(room_id)
+  //res.status(200).send(room_id);
+  res.redirect('/rooms/' + room_id);
+});
+
+app.post('/run', function (req, res) {
+  
+  var data;
+  
+  new Promise(function(resolve, reject){
+    
+    Request.post({
+      url: 'https://api.judge0.com/submissions?wait=true',
+      body: JSON.stringify(req.body),
+      headers: {'content-type': 'application/json'},
+    }, function (error, response, body) {
+      if (error) {
+        console.log(error);
+        resolve();
+      }
+        console.log('body',body);
+        data = body;
+        resolve();
+    });
+  }).then(function(){
+    res.send(data);
+  });
+  
+  // console.log(data);
+  
 });
 
 app.use('/', index);
