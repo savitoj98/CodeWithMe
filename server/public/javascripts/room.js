@@ -138,11 +138,13 @@
     function write_to_html(out_data) {
         var stdout = out_data["stdout"];
         var time = out_data["time"];
-        var status = out_data["status"]["description"];
+        var status = unescape(out_data["status"]["description"]);
+
+
 
         $('#output_status').html('<b>Status:</b> ' + status);
         $('#output_time').html('<b>Time:</b> ' + time);
-        $('#output_stdout').html('<b>Output:</b> ' + stdout);
+        $('#output_stdout').html('<b>Output:</b><br> <textarea rows="10" style="border: none">' + stdout + '</textarea>');
     }
 
     $('#compile-run').click(function(e) {
@@ -162,3 +164,19 @@
                 }
             });
     });
+
+
+//Socket
+
+    var socket = io();
+
+    socket.on('connect', function() {
+        var room_id = window.location.pathname.slice(7);
+        console.log('Connected to ' + room_id);
+    });
+
+    socket.on('disconnect', function () {
+        console.log('Disconnected from server');
+    });
+
+    
