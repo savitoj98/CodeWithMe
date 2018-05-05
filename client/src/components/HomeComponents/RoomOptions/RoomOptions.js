@@ -8,6 +8,7 @@ const roomOptions = (props) => {
         <div>
             New Room:
             <button onClick={props.newRoomClicked}>Get Room Id</button>
+            {/* <Link to='/new_room'>new room</Link> */}
         </div>
         <div>
             <form>
