@@ -1,18 +1,19 @@
 var express = require('express');
 var path = require('path');
+var http = require('http');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var cors = require("cors");
 var Request = require('request');
+
 var index = require('./routes/index');
 var rooms = require('./routes/rooms');
-
-var app = express();
-
 var generate = require('./generate-room');
 
+
+var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -26,6 +27,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
+
+
+
 
 app.post('/enter_room', function (req, res, next) {
   //console.log(req);
