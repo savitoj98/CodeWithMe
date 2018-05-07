@@ -11,7 +11,7 @@ class Room extends Component{
         return(
          <div>   
             <h1>This is your unique room</h1>
-            <CodeArea></CodeArea>
+            <CodeArea roomId= {this.state.roomId}></CodeArea>
          </div>   
         );
     }
