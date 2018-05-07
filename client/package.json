@@ -5,15 +5,22 @@
   "dependencies": {
     "axios": "^0.18.0",
     "react": "^16.3.2",
+    "react-codemirror": "^1.0.0",
+    "react-codemirror2": "^5.0.1",
     "react-dom": "^16.3.2",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "1.1.4"
+    "react-scripts": "1.1.4",
+    "socket.io-client": "^2.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "dev": "concurrently --kill-others \"npm start\" \"cd ../server && npm start \""
   },
-  "proxy": "http://localhost:5000"
+  "proxy": "http://localhost:5000",
+  "devDependencies": {
+    "concurrently": "^3.5.1"
+  }
 }
