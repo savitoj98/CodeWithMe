@@ -31,12 +31,17 @@ app.use(cors());
 
 
 
-app.post('/enter_room', function (req, res, next) {
-  //console.log(req);
-  var room_id = generate.generateRoom();
-  //res.status(200).send(room_id);
-  res.redirect('/rooms/' + room_id);
-});
+// app.post('/enter_room', function (req, res, next) {
+//   //console.log(req);
+//   var room_id = generate.generateRoom();
+//   //res.status(200).send(room_id);
+//   res.redirect('/rooms/' + room_id);
+// });
+
+app.get('/new_room', (req,res,next) => {
+    var room_id = generate.generateRoom()
+    res.status(200).send(room_id)
+})
 
 app.post('/run', function (req, res) {
   
@@ -65,8 +70,8 @@ app.post('/run', function (req, res) {
   
 });
 
-app.use('/', index);
-app.use('/rooms/:id', rooms);
+// app.use('/', index);
+// app.use('/rooms/:id', rooms);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

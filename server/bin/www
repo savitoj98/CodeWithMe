@@ -7,7 +7,7 @@
 var app = require('../app');
 var debug = require('debug')('codewithme:server');
 var http = require('http');
-
+var {generateRoom} = require("../generate-room")
 /**
  * Get port from environment and store in Express.
  */
@@ -30,8 +30,16 @@ var io = socketIO(server);
 
 io.on('connection', function (socket) {
     console.log('New user connected');
-  
-  
+    console.log(socket)  
+    var id = generateRoom()
+    socket.emit('userId', id)
+    
+    socket.on("code_updated", (data) => {
+      console.log('socket received on server')
+      console.log(data)
+      socket.broadcast.emit("process code", {data})
+    })      
+
     socket.on('disconnect', function () {
         console.log('User disconnected');
     })
