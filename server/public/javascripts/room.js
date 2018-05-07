@@ -139,9 +139,7 @@
         var stdout = out_data["stdout"];
         var time = out_data["time"];
         var status = unescape(out_data["status"]["description"]);
-
-
-
+        
         $('#output_status').html('<b>Status:</b> ' + status);
         $('#output_time').html('<b>Time:</b> ' + time);
         $('#output_stdout').html('<b>Output:</b><br> <textarea rows="10" style="border: none">' + stdout + '</textarea>');
