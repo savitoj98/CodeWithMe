@@ -70,7 +70,7 @@ class CodeOutput extends Component {
     render(){
         console.log("output area"+this.props.code)
         return(
-
+            
           <div>
             <button onClick={() => this.compileHandler()}>Compile</button>
             <p>Output : {this.state.stdout}</p>

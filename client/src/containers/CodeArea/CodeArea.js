@@ -82,8 +82,13 @@ class CodeArea extends Component{
         // console.log(this.state.code)
         return (
         <div>
-            <CodeMirror value = {this.state.code} options = {options} onChange = {this.codeUpdateHandler} onBeforeChange = {this.beforeCodeUpdateHandler} onKeyPress={this.keyPressHandler} onKeyDown={this.keyPressHandler}/>
+            <div>
+                <CodeMirror value = {this.state.code} options = {options} onChange = {this.codeUpdateHandler} onBeforeChange = {this.beforeCodeUpdateHandler} onKeyPress={this.keyPressHandler} onKeyDown={this.keyPressHandler}/>
+            </div>
+            
+
             <ModeSelector change = {this.modeSelectHandler}></ModeSelector>
+
             <CodeOutput language={this.state.language} code = {this.state.code}></CodeOutput>
         </div>    
    
