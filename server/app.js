@@ -7,7 +7,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var cors = require("cors");
 var Request = require('request');
-
+var FileData = require('./files')
 var index = require('./routes/index');
 var rooms = require('./routes/rooms');
 var generate = require('./generate-room');
@@ -69,6 +69,42 @@ app.post('/run', function (req, res) {
   // console.log(data);
   
 });
+
+app.get('/files', (req,res,next) => {
+
+  // var sha = "2e1dd52c3bbc4b0f165140da3a35c9b8f6f59d88"
+  // new Promise(function(resolve, reject){
+    
+  //   Request.get({
+  //    // url: 'https://api.github.com/repos/meghansh36/basics-intern/branches/master',
+  //    url: "https://api.github.com/repos/meghansh36/basics-intern/git/trees/adb47c194ee6a92ad239f45a09945e8ee44f90e2?client_id=84824e2e6f532187cf11&client_secret=ba3d413076758abf7af6a283f01a10ff3ad668e2",
+  //     headers: {'User-Agent': 'meghansh36'}
+  //   }, function (error, response, body) {
+  //     if (error) {
+  //       reject(error);
+  //     }
+  //       // console.log('body',body);
+  //       data = body;
+  //       resolve();
+  //   });
+  // }).then(function(){
+  //   res.json(JSON.parse(data));
+  // }).catch(e => console.log(e));
+
+  new Promise(function(resolve,reject){
+    var files = FileData.startfile();
+    if(files){
+      resolve(files)
+    }
+    else{
+      reject("error")
+    }
+  }).then(files => {
+    //console.log(files)
+    res.json(files)
+  }).catch(e => res.send(e))
+});
+
 
 // app.use('/', index);
 // app.use('/rooms/:id', rooms);
