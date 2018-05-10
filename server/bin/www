@@ -41,10 +41,11 @@ io.on('connection', function (socket) {
     
     socket.on("code_updated", (data) => {
       console.log('socket received on server')
-      console.log(data)
+      //console.log(data)
       // socket.broadcast.emit("process code", {data})
-      io.to(data.roomId).emit("process code", {data})
-    })      
+      // socket.broadcast.to(data.roomId).emit("process code", {data}) 
+      socket.broadcast.to(data.roomId).emit("process code",{data})
+    })       
 
     socket.on('disconnect', function () {
         console.log('User disconnected');
