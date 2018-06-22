@@ -207,7 +207,7 @@ class CodeArea extends Component{
            </div>
          </div>
        </nav>
-        <ModeSelector change = {this.modeSelectHandler}></ModeSelector>
+       <ModeSelector change = {this.modeSelectHandler} lang={this.state.language} ></ModeSelector>
         <ThemeSelector change = {this.themeSelectorHandler}></ThemeSelector>
         <FileUpload uploadFile = {this.fileUploadHandler}/>  
         <FileDownload downloadFile = {this.fileDownloadHandler} />
@@ -223,7 +223,7 @@ class CodeArea extends Component{
                 className = {classes.CodeEditor} />
         </div>
         
-        <CodeInput change = {this.inputHandler}  ></CodeInput>
+        <CodeInput change = {this.inputHandler} ></CodeInput>
 
         <CodeOutput 
             language={this.state.language} 

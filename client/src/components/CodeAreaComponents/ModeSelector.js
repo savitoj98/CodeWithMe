@@ -62,14 +62,15 @@ const modeSelector = (props) => {
     return(
       <div className="form-group">
         <select name="modes"  className="form-control selecting" onChange = {(e) => {props.change(e.target.value,lang_obj[e.target.value].mode,lang_obj[e.target.value].value);console.log('c')}}>
-            <option value="C" defaultValue>C</option>
-            <option value="C++">C++</option>
-            <option value="Java">Java</option>
-            <option value="Javascript" >Javascript</option>
-            <option value="C#">C#</option>
-            <option value="Ruby">Ruby</option>
-            <option value="Python3">Python 3</option>
-            <option value="Python2">Python 2</option>
+        <option value="C" selected={props.lang === 'C'}>C</option>
+        <option value="C++" selected={props.lang === 'C++'}>C++</option>
+        <option value="Java" selected={props.lang === 'Java'}>Java</option>
+        <option value="Javascript"  selected={props.lang === 'Javascript'}>Javascript</option>
+        <option value="C#" selected={props.lang === 'C#'}>C#</option>
+        <option value="Ruby" selected={props.lang === 'Ruby'}>Ruby</option>
+        <option value="Python3" selected={props.lang === 'Python3'}>Python 3</option>
+        <option value="Python2" selected={props.lang === 'Python2'}>Python 2</option>
+
         </select>
         </div>
     );
