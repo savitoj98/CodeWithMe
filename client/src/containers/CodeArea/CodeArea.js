@@ -151,7 +151,26 @@ class CodeArea extends Component{
         }
         // console.log(this.state.code)
         return (
-        <div>
+            <div className="main2">
+            <nav className="navbar navbar-inverse">
+         <div className="container-fluid">
+           <div className="navbar-header">
+             <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+               <span className="icon-bar"></span>
+               <span className="icon-bar"></span>
+               <span className="icon-bar"></span>
+             </button>
+             <a className="navbar-brand" href={" "}>CodeWithMe</a>
+           </div>
+           <div className="collapse navbar-collapse" id="myNavbar">
+             <ul className="nav navbar-nav">
+               <li><a href={"http://localhost:3000"}>Home</a></li>
+               <li><a href={"https://github.com/flaredragon/CodeWithMe"}>Source Code</a></li>
+               <li><a href={"https://api.judge0.com"}>Judge</a></li>
+             </ul>
+           </div>
+         </div>
+       </nav>
         <ModeSelector change = {this.modeSelectHandler}></ModeSelector>
         <ThemeSelector change = {this.themeSelectorHandler}></ThemeSelector>
         <FileUpload uploadFile = {this.fileUploadHandler}/>  

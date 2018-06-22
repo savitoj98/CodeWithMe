@@ -58,7 +58,8 @@ const modeSelector = (props) => {
     };
 
     return(
-        <select name="modes" onChange = {(e) => {props.change(e.target.value,lang_obj[e.target.value].mode,lang_obj[e.target.value].value);console.log('c')}}>
+        <div className="form-group">
+        <select name="modes"  className="form-control selecting" onChange = {(e) => {props.change(e.target.value,lang_obj[e.target.value].mode,lang_obj[e.target.value].value);console.log('c')}}>
             <option value="C" defaultValue>C</option>
             <option value="C++">C++</option>
             <option value="Java">Java</option>
@@ -68,6 +69,7 @@ const modeSelector = (props) => {
             <option value="Python3">Python 3</option>
             <option value="Python2">Python 2</option>
         </select>
+        </div>
     );
 
 } 

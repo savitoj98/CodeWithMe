@@ -2,7 +2,8 @@ import React from 'react';
 
 const themeSelector = (props) => {
     return (
-        <select name="themes" onChange={(e) => {props.change(e.target.value)}}>
+        <div className="form-group">
+        <select name="themes" className="form-control selecting" onChange={(e) => {props.change(e.target.value)}}>
             <option value="ambiance" defaultValue >Ambiance</option>
             <option value="material">Material</option>
             <option value="eclipse">Eclipse</option>
@@ -15,6 +16,7 @@ const themeSelector = (props) => {
             <option value="xq-light">Xq-light</option>
             <option value="xq-dark">Xq-dark</option>
         </select>
+        </div>
     );
 }; 
 

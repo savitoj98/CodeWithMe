@@ -7,7 +7,6 @@ const layout = (props) => {
 
     return (
         <Aux>
-            <div>Toolbar, sidedrawer, backdrop</div>
             <Switch>
                 <Route path="/" exact component={Home} />
                 <Route path="/rooms/:id" component={Room} />

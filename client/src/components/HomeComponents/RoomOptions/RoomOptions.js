@@ -6,15 +6,18 @@ const roomOptions = (props) => {
 
     return (
     <Aux>    
-        <div>
-            New Room:
-            <Button bsStyle="primary" onClick={props.newRoomClicked}>Get Room Id</Button>
+        <div className='paddings'>
+            For a New Room 
+            <br/>
+            <Button className="btn-lg" bsStyle="primary" onClick={props.newRoomClicked}>Get Room Id</Button>
             {/* <Link to='/new_room'>new room</Link> */}
         </div>
-        <div>
+        <h3>OR</h3>
+        <div className="paddings">
+            Enter Existing Rooms
             <form>
-                <input type="text"/>
-                <a href="/existing">Enter Room</a>
+                <input className="rounding selectingmore2" type="text"/>
+                <button type="submit" className="btn btn-lg btn-primary">Enter Room</button>
             </form>
         </div>
     </Aux>    

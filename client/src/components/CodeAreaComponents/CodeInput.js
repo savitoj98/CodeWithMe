@@ -3,11 +3,13 @@ import Aux from '../../hoc/aux';
 
 const codeInput = (props) => {
     return (
+        <div className="inputs" >
         <Aux>
-            <p>Input (optional):</p>
-            <textarea rows="5" cols="50" onChange={(e) => {console.log(e);props.change(e.target.value)}} ></textarea>
+            <p className="paddings">Input (optional):</p>
+            <textarea className="rounding" rows="8" cols="50" onChange={(e) => {console.log(e);props.change(e.target.value)}} ></textarea>
             <br /><br />
-        </Aux> 
+        </Aux>
+        </div>
     );
 };
 
