@@ -11,6 +11,7 @@ var FileData = require('./files')
 var index = require('./routes/index');
 var rooms = require('./routes/rooms');
 var generate = require('./generate-room');
+var tempdb = require('./tempdb');
 
 
 var app = express();
@@ -29,8 +30,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 
 
-
-
 // app.post('/enter_room', function (req, res, next) {
 //   //console.log(req);
 //   var room_id = generate.generateRoom();
@@ -43,10 +42,31 @@ app.get('/new_room', (req,res,next) => {
     res.status(200).send(room_id)
 })
 
-app.post('/run', function (req, res) {
+app.post('/save_data', (req, res, next) => {
+    
+    var roomId = req.body.roomId;
+    var code = req.body.code;
+    var lang = req.body.lang;
+    var input = req.body.input;
+     
+    tempdb.saveData(roomId, lang, code, input);
+    console.log('returning saved code from db',tempdb.getData(roomId));
+    res.status(200).send('Success');
+}) 
   
+app.post('/get_data', (req, res, next) => { 
+
+  console.log('inside getdata',req.body);
+  tempdb.printData();
+  console.log('sending data rom server', tempdb.getData(req.body.roomId));
+  res.status(200).send(tempdb.getData(req.body.roomId)); 
+ 
+})
+  
+app.post('/run', function (req, res) {
+   
   var data;
-  console.log(req.body);
+  console.log('input data',req.body);
   new Promise(function(resolve, reject){
     
     Request.post({
@@ -56,7 +76,7 @@ app.post('/run', function (req, res) {
     }, function (error, response, body) {
       if (error) {
         console.log(error);
-        resolve();
+        resolve(); 
       }
         console.log('body',body);
         data = body;
