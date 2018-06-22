@@ -2,15 +2,31 @@ import React, {Component} from "react"
 import {Controlled as CodeMirror} from 'react-codemirror2'
 import ModeSelector from "../../components/CodeAreaComponents/ModeSelector"
 import CodeOutput from "./CodeOutput"
+import CodeInput from "../../components/CodeAreaComponents/CodeInput"
 import FileUpload from "../../components/CodeAreaComponents/FileUpload"
+import FileDownload from "../../components/CodeAreaComponents/FileDownload"
+import ThemeSelector from "../../components/CodeAreaComponents/ThemeSelector";
 // import Aux from "../../hoc/aux"
 import socketIOClient from "socket.io-client"
 import "codemirror/lib/codemirror.css"
+//Themes
 import "codemirror/theme/ambiance.css"
+import 'codemirror/theme/material.css';
+import 'codemirror/theme/eclipse.css'
+import 'codemirror/theme/twilight.css'
+import 'codemirror/theme/gruvbox-dark.css'
+import 'codemirror/theme/elegant.css'
+import 'codemirror/theme/base16-dark.css'
+import 'codemirror/theme/base16-light.css'
+import 'codemirror/theme/ttcn.css'
+import 'codemirror/theme/xq-light.css'
+import 'codemirror/theme/xq-dark.css'
+//Languages
 import "codemirror/mode/javascript/javascript"
 import "codemirror/mode/clike/clike"
 import "codemirror/mode/python/python"
 import "codemirror/mode/ruby/ruby"
+
 import classes from "./CodeArea.css"
 
 class CodeArea extends Component{
@@ -22,6 +38,8 @@ class CodeArea extends Component{
         theme: 'ambiance',
         roomId: this.props.roomId,
         editing:false,
+        stdin: null,
+        // expected_output: null
 
     }
 
@@ -52,8 +70,29 @@ class CodeArea extends Component{
         this.setState({
             mode: mode,
             language: lang,
-            code: defaultCode.length > this.state.code.length ? defaultCode : this.state.code
+            code: defaultCode
+            //.length > this.state.code.length ? defaultCode : this.state.code
         })
+    }
+
+    inputHandler = (input) => {
+        console.log('input',input);
+        if(input){
+            this.setState({
+                stdin: input
+            });
+        }
+        else {
+            this.setState({
+                stdin: null
+            });
+        }
+    }
+
+    themeSelectorHandler = (themeSelected) => {
+        this.setState({
+            theme: themeSelected
+        });
     }
 
     fileUploadHandler = (event) => {
@@ -73,6 +112,10 @@ class CodeArea extends Component{
           // axios.post('/files', data)..
           
         }
+    }
+
+    fileDownloadHandler = () => {
+        
     }
 
     //LIFECYCLE METHODS AND THEIR HELPER FUNCTIONS ARE DEFINED BELOW
@@ -110,14 +153,27 @@ class CodeArea extends Component{
         return (
         <div>
         <ModeSelector change = {this.modeSelectHandler}></ModeSelector>
-        <FileUpload uploadFile = {this.fileUploadHandler}/>    
+        <ThemeSelector change = {this.themeSelectorHandler}></ThemeSelector>
+        <FileUpload uploadFile = {this.fileUploadHandler}/>  
+        <FileDownload downloadFile = {this.fileDownloadHandler} />
+
         <div className={classes.CodeArea}>
+            <CodeMirror 
+                value = {this.state.code} 
+                options = {options} 
+                onChange = {this.codeUpdateHandler} 
+                onBeforeChange = {this.beforeCodeUpdateHandler} 
+                onKeyPress={this.keyPressHandler} 
+                onKeyDown={this.keyPressHandler} 
+                className = {classes.CodeEditor} />
+        </div>
+        
+        <CodeInput change = {this.inputHandler} ></CodeInput>
 
-                <CodeMirror value = {this.state.code} options = {options} onChange = {this.codeUpdateHandler} onBeforeChange = {this.beforeCodeUpdateHandler} onKeyPress={this.keyPressHandler} onKeyDown={this.keyPressHandler} className = {classes.CodeEditor}/>
-
-            </div>
-            
-            <CodeOutput language={this.state.language} code = {this.state.code}></CodeOutput>
+        <CodeOutput 
+            language={this.state.language} 
+            code = {this.state.code} 
+            stdin = {this.state.stdin} ></CodeOutput>
         </div>    
    
     );

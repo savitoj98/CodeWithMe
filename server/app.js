@@ -46,7 +46,7 @@ app.get('/new_room', (req,res,next) => {
 app.post('/run', function (req, res) {
   
   var data;
-  
+  console.log(req.body);
   new Promise(function(resolve, reject){
     
     Request.post({

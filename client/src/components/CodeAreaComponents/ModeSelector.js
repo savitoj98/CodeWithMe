@@ -13,7 +13,7 @@ const modeSelector = (props) => {
         },
         'Java': {
             'mode': 'text/x-java',
-            'value': "class HelloWorldApp {\n" +
+            'value': "public class Main {\n" +
                     "    public static void main(String[] args) {\n" +
                     "        System.out.println(\"Hello World\");\n" +
                     "    }\n" +
@@ -53,7 +53,7 @@ const modeSelector = (props) => {
         },
         'Ruby': {
             'mode': 'text/x-ruby',
-            'value': 'puts "Hello World"'
+            'value': "puts \"Hello World\""
         }
     };
 
