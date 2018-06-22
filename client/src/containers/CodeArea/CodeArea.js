@@ -8,6 +8,7 @@ import FileDownload from "../../components/CodeAreaComponents/FileDownload"
 import ThemeSelector from "../../components/CodeAreaComponents/ThemeSelector";
 // import Aux from "../../hoc/aux"
 import socketIOClient from "socket.io-client"
+import axios from 'axios';
 import "codemirror/lib/codemirror.css"
 //Themes
 import "codemirror/theme/ambiance.css"
@@ -62,7 +63,24 @@ class CodeArea extends Component{
         if(this.state.editing){ //SOLVES TYPE GLITCH
             //console.log("socket emitted")
             //emit socket for code update
-            this.socket.emit("code_updated", {code: this.state.code, roomId: this.state.roomId}) 
+
+            let saveData = {
+                code: this.state.code,
+                roomId: this.state.roomId,
+                lang: this.state.language,
+                input: this.state.stdin
+            }    
+            
+            this.socket.emit("code_updated", saveData); 
+            
+            axios.post('http://localhost:5000/save_data', saveData)
+                .then(res => {
+                    console.log(res.data);
+                })
+                .catch(e => {
+                    console.log(e);
+                });
+        
         }
     }
 
@@ -123,21 +141,39 @@ class CodeArea extends Component{
     componentWillMount(){
         this.socket.emit("create_room", this.state.roomId)
         //console.log(this.state.code)
+        axios.post('http://localhost:5000/get_data', this.state)
+            .then(res => {
+                this.updateCodeFromSockets(res.data.code, res.data.input, res.data.lang)
+            })
+            .catch(e => {
+                console.log(e);
+            })
+
     }
 
     componentDidMount(){  // HOOK FOR LIFECYCLE. LISTENS FOR INCOMING SOCKETS
             this.socket.on("process code", (response) => {
-                this.updateCodeFromSockets(response.data.code)
+                this.updateCodeFromSockets(response.data.code, response.data.input, response.data.lang)
                 //console.log("socket received")  
             })
         
     }
-    updateCodeFromSockets = (payload) => {  
+
+    componentDidUpdate(){
+        this.socket.on("process code", (response) => {
+            this.updateCodeFromSockets(response.data.code, response.data.input, response.data.lang)
+            //console.log("socket received")  
+        })
+    }
+
+    updateCodeFromSockets = (code,input,lang) => {  
         //SETS NEW STATE. CHANGES EDITING TO FALSE. IMPORTANT! 
         //SOLVES TYPE GLITCH
-             
+             console.log('updateCodeFRomSockets')
             this.setState({
-                code: payload,
+                input:input,
+                language:lang,
+                code: code,
                 editing: false
             })
         
@@ -187,7 +223,7 @@ class CodeArea extends Component{
                 className = {classes.CodeEditor} />
         </div>
         
-        <CodeInput change = {this.inputHandler} ></CodeInput>
+        <CodeInput change = {this.inputHandler}  ></CodeInput>
 
         <CodeOutput 
             language={this.state.language} 

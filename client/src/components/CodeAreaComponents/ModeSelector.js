@@ -57,8 +57,10 @@ const modeSelector = (props) => {
         }
     };
 
+    
+
     return(
-        <div className="form-group">
+      <div className="form-group">
         <select name="modes"  className="form-control selecting" onChange = {(e) => {props.change(e.target.value,lang_obj[e.target.value].mode,lang_obj[e.target.value].value);console.log('c')}}>
             <option value="C" defaultValue>C</option>
             <option value="C++">C++</option>
