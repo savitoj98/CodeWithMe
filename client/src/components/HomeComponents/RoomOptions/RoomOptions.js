@@ -1,5 +1,6 @@
 import React from "react" 
 import Aux from "../../../hoc/aux"
+import {Button} from 'react-bootstrap'
 
 const roomOptions = (props) => {
 
@@ -7,7 +8,7 @@ const roomOptions = (props) => {
     <Aux>    
         <div>
             New Room:
-            <button onClick={props.newRoomClicked}>Get Room Id</button>
+            <Button bsStyle="primary" onClick={props.newRoomClicked}>Get Room Id</Button>
             {/* <Link to='/new_room'>new room</Link> */}
         </div>
         <div>

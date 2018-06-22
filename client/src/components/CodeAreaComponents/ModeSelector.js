@@ -1,5 +1,4 @@
-import React from "react" 
-
+import React from "react" ;
 
 const modeSelector = (props) => {
 
@@ -34,17 +33,17 @@ const modeSelector = (props) => {
         },
         'Python3': {
             'mode': {
-                name: 'python',
-                version: 3,
-                singleLineStringErrors: false
+                'name': 'python',
+                'version': '3',
+                'singleLineStringErrors': 'false'
             },
             'value': "print('Hello World')"
         },
         'Python2': {
             'mode': {
-                name: 'python',
-                version: 2,
-                singleLineStringErrors: false
+                'name': 'python',
+                'version': '2',
+                'singleLineStringErrors': 'false'
             },
             'value': "print 'Hello World' "
         },
@@ -59,7 +58,7 @@ const modeSelector = (props) => {
     };
 
     return(
-        <select name="modes" onChange = {(e) => props.change(e.target.value,lang_obj[e.target.value].mode,lang_obj[e.target.value].value)}>
+        <select name="modes" onChange = {(e) => {props.change(e.target.value,lang_obj[e.target.value].mode,lang_obj[e.target.value].value);console.log('c')}}>
             <option value="C" defaultValue>C</option>
             <option value="C++">C++</option>
             <option value="Java">Java</option>

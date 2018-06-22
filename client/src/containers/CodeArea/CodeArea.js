@@ -109,13 +109,14 @@ class CodeArea extends Component{
         // console.log(this.state.code)
         return (
         <div>
-            <div className={classes.CodeArea}>
+        <ModeSelector change = {this.modeSelectHandler}></ModeSelector>
+        <FileUpload uploadFile = {this.fileUploadHandler}/>    
+        <div className={classes.CodeArea}>
 
                 <CodeMirror value = {this.state.code} options = {options} onChange = {this.codeUpdateHandler} onBeforeChange = {this.beforeCodeUpdateHandler} onKeyPress={this.keyPressHandler} onKeyDown={this.keyPressHandler} className = {classes.CodeEditor}/>
 
             </div>
-            <ModeSelector change = {this.modeSelectHandler}></ModeSelector>
-            <FileUpload uploadFile = {this.fileUploadHandler}/>
+            
             <CodeOutput language={this.state.language} code = {this.state.code}></CodeOutput>
         </div>    
    

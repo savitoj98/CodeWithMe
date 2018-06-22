@@ -52,10 +52,10 @@ class CodeOutput extends Component {
         axios.post('/run', data)
         .then( response => {
             this.setState({
-                stdout: response.data.stdout,
-                time: response.data.time,
+                stdout: response.data.stdout||"Null",
+                time: response.data.time||0,
                 description: response.data.status.description,
-                error: response.data.compile_output,
+                error: response.data.stderr||response.data.compile_output||"Null",
                 update: !this.state.update
             })
             console.log(response)
@@ -64,9 +64,7 @@ class CodeOutput extends Component {
         })
     
     }
-
-
-
+    
     render(){
         console.log("output area"+this.props.code)
         return(
