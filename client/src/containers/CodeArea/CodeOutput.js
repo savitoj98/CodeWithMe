@@ -70,12 +70,12 @@ class CodeOutput extends Component {
         console.log("output area"+this.props.code)
         return(
             
-          <div>
-            <button onClick={() => this.compileHandler()}>Compile</button>
-            <p>Output : {this.state.stdout}</p>
-            <p>time: {this.state.time}</p>
-            <p>description:{this.state.description}</p>
-            <p>error: {this.state.error}</p>
+          <div className="paddings">
+            <button className="btn btn-primary" onClick={() => this.compileHandler()}>Compile</button>
+            <div>Output : {this.state.stdout}</div>
+            <div>time: {this.state.time}</div>
+            <div>description:{this.state.description}</div>
+            <div>error: {this.state.error}</div>
           </div>  
             
         );

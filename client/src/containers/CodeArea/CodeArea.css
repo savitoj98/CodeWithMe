@@ -1,7 +1,8 @@
 .CodeArea{
     display:flex;
     justify-content: flex-start;
-    height: 400px;
+    height: 320px;
+    padding: 0;
 }
 
 .FileArea{
@@ -13,5 +14,5 @@
 
 .CodeEditor{
     height: inherit;
-    width: 80%;
+    width: 100%;
 }
