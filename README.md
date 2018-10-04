@@ -16,24 +16,24 @@ To get started with the project you would need to setup [Node.js](https://nodejs
 ### Installing
 
 
-* Clone the Github Repository using the following command
+Clone the Github Repository using the following command
 ```
 git clone https://github.com/PaytmBuildForIndia/CodeWithMe.git
 ```
 
-* Navigate into the Server Folder and Start the server
+Navigate into the Server Folder and Start the server
 ```
 cd CodeWithMe/server
 npm run start
 ```
 
-* Navigate into the Client Folder and Start the Frontend 
+Navigate into the Client Folder and Start the Frontend 
 ```
 cd CodeWithMe/client
 npm run start
 ```
 
-The App would be running on localhost:3000 for further use.
+The App would be running on [localhost:3000](http://localhost:3000) for further use.
 
 ## Built With
 
@@ -46,7 +46,7 @@ The App would be running on localhost:3000 for further use.
 
 This project is licensed under the Apache License - see the [LICENSE.md](LICENSE.md) file for details
 
-##Features 
+## Features 
 
 * Real-Time Code Collaboration achieved using Web Sockets by formation of multiple rooms(Like Chat-Rooms)
 * Code Testing using Integrated Code Judge.
@@ -54,7 +54,7 @@ This project is licensed under the Apache License - see the [LICENSE.md](LICENSE
 * Multiple Theme Support.
 * Real Time Chat Integration through Plug-in.
 
-##Screenshots
+## Screenshots
 
 * The Main Page
 ![Main Page](https://i.imgur.com/3nmqNva.png)
